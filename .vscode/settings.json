@@ -1,0 +1,5 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:pipenv",
+    "python.defaultInterpreterPath": "C:\\Users\\Tayari\\.virtualenvs\\my-todo-list-JuuE0hpA\\Scripts\\python.exe",
+    "python.terminal.activateEnvironment": true
+}

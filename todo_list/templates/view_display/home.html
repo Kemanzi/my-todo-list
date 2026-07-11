@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css' %}">
+</head>
+
+<body>
+
+<div class="home-page">
+
+    <div class="page-header">
+        <h2>Tasks {% if active_tasks %}({{ active_tasks|length }} active){% endif %}</h2>
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" id="logout-button">Logout</button>
+        </form>
+    </div>
+
+    <button id="open-modal">
+        + Add Task
+    </button>
+
+    <!-- ACTIVE TASKS -->
+    {% for task in active_tasks %}
+        {% include "components/task_item.html" %}
+    {% empty %}
+        <p>No active tasks.</p>
+    {% endfor %}
+
+    <hr>
+
+    <!-- IMPORTANT -->
+    <details id="important-section" open>
+
+        <summary>Important</summary>
+
+        {% for task in important_tasks %}
+        {% include "components/task_item.html" %}
+        {% empty %}
+
+            <p>No important tasks.</p>
+
+        {% endfor %}
+
+    </details>
+
+    <hr>
+
+    <!-- COMPLETED -->
+    <details id="completed-section" open>
+
+        <summary>Completed</summary>
+
+        {% for task in completed_tasks %}
+            {% include "components/task_item.html" %}
+        {% empty %}
+            <p>No completed tasks.</p>
+
+        {% endfor %}
+
+    </details>
+
+    <!-- ADD TASK MODAL -->
+    <div id="task-modal" class="modal" {% if show_add_modal %}style="display:flex;"{% endif %}>
+
+        <div class="modal-content">
+
+            <button id="close-modal">&times;</button>
+
+            <h2>Add Task</h2>
+
+            <form method="POST" action="{% url 'add_task' %}">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit">
+                    Save Task
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css' %}">
+</head>
+<body>
+    <div class="auth-form">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username"> Username: </label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit"> Login </button>
+        </form>
+
+    {% if error %}
+        <p class="error">{{error}}</p>
+    {% endif  %}
+    
+    <p>Don't have an account? <a href="{% url 'register' %}">Register Here</a></p>
+    </div>
+</body>
+</html>
