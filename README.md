@@ -22,8 +22,8 @@ private list of tasks, which can be marked important, marked complete, edited, o
 
 ## Installation
 
-```
-git clone <repo-url>
+```sh
+git clone <https://github.com/Kemanzi/my-todo-list.git>
 
 python -m venv venv
 
